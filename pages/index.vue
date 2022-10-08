@@ -1,11 +1,14 @@
 <template>
-  <div class="bg-slate-700 h-screen font-mono" >
+  <div class="flex flex-col items-center bg-slate-700 h-screen font-mono" >
     <h1 class="text-6xl text-white p-10">To-Do</h1>
 
-    <div class="p-5 text-white">
+    <div class="flex p-5 text-white flex-col items-center">
       <p class="text-3xl">Add tasks</p>
-      <input type="text" v-model="newTask" placeholder="New task" @keypress.enter="addTask"/>
-      <button @click="addTask">+</button>
+      <div class="flex flex-row">
+        <input class="text-slate-700 rounded-md p-2" type="text" v-model="newTask" placeholder="New task" @keypress.enter="addTask"/>
+        <button class="ml-5" @click="addTask">+</button>
+      </div>
+
     </div>
     <div class="list">
       <Task v-for="(task, i) in $store.state.tasks" :key="i" :task="task"/>
@@ -20,7 +23,7 @@ import Vue from 'vue'
 export default Vue.extend({
   data () {
     return {
-      newTask: ''
+      newTask: this.$store.state.tasks
     }
   },
   methods: {
